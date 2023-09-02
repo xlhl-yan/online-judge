@@ -1,4 +1,5 @@
 import { StoreOptions } from "vuex";
+import AccessEnum from "@/access/accessEnum";
 // state
 // 存储的信息（比如用户信息）
 
@@ -15,15 +16,15 @@ export default {
   namespaced: true,
   state: {
     loginUser: {
-      username: "未登录",
-      role: "notLogin",
+      userName: "未登录",
+      userRole: AccessEnum.NOT_LOGIN,
     },
   },
   getters,
   actions: {
     getLoginUser({ commit, state }, payload) {
       // todo 改为远程登录 获取用户信息
-      commit("updateUser", { username: "Helena" });
+      commit("updateUser", payload);
     },
   },
   mutations: {
