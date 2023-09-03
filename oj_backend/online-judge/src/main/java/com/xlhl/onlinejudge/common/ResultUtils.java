@@ -15,8 +15,8 @@ public class ResultUtils {
      * @param <T>
      * @return
      */
-    public static <T> com.xlhl.onlinejudge.common.BaseResponse<T> success(T data) {
-        return new com.xlhl.onlinejudge.common.BaseResponse<>(0, data, "ok");
+    public static <T> BaseResponse<T> success(T data) {
+        return new BaseResponse<>(0, data, "ok");
     }
 
     /**
@@ -25,8 +25,8 @@ public class ResultUtils {
      * @param errorCode
      * @return
      */
-    public static com.xlhl.onlinejudge.common.BaseResponse error(ErrorCode errorCode) {
-        return new com.xlhl.onlinejudge.common.BaseResponse<>(errorCode);
+    public static BaseResponse<?> error(ErrorCode errorCode) {
+        return new BaseResponse<>(errorCode);
     }
 
     /**
@@ -36,8 +36,8 @@ public class ResultUtils {
      * @param message
      * @return
      */
-    public static com.xlhl.onlinejudge.common.BaseResponse error(int code, String message) {
-        return new com.xlhl.onlinejudge.common.BaseResponse(code, null, message);
+    public static BaseResponse<?> error(int code, String message) {
+        return new BaseResponse<>(code, null, message);
     }
 
     /**
@@ -46,7 +46,7 @@ public class ResultUtils {
      * @param errorCode
      * @return
      */
-    public static com.xlhl.onlinejudge.common.BaseResponse error(ErrorCode errorCode, String message) {
-        return new com.xlhl.onlinejudge.common.BaseResponse(errorCode.getCode(), null, message);
+    public static BaseResponse<?> error(ErrorCode errorCode, String message) {
+        return new BaseResponse<>(errorCode.getCode(), null, message);
     }
 }

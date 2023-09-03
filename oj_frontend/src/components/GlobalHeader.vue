@@ -3,7 +3,7 @@
     <a-col flex="100px">
       <div class="title-bar">
         <img class="logo" src="../assets/logo.jpg" />
-        <div class="title">Online Judge</div>
+        <div class="title">这里是logo</div>
       </div>
     </a-col>
     <a-col flex="auto">
@@ -35,7 +35,6 @@ import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
-import AccessEnum from "@/access/accessEnum";
 
 const store = useStore();
 const router = useRouter();
@@ -60,12 +59,12 @@ router.afterEach((to, from, failure) => {
   selectedKeys.value = [to.path];
 });
 
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    userName: "Helena",
-    userRole: AccessEnum.ADMIN,
-  });
-}, 1000 * 3);
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     userName: "Helena",
+//     userRole: AccessEnum.ADMIN,
+//   });
+// }, 1000 * 3);
 
 const doMenuClick = (key: string) => {
   router.push({

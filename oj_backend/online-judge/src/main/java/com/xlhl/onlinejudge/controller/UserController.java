@@ -6,36 +6,22 @@ import com.xlhl.onlinejudge.common.BaseResponse;
 import com.xlhl.onlinejudge.common.DeleteRequest;
 import com.xlhl.onlinejudge.common.ErrorCode;
 import com.xlhl.onlinejudge.common.ResultUtils;
-import com.xlhl.onlinejudge.config.WxOpenConfig;
 import com.xlhl.onlinejudge.constant.UserConstant;
 import com.xlhl.onlinejudge.exception.BusinessException;
 import com.xlhl.onlinejudge.exception.ThrowUtils;
-import com.xlhl.onlinejudge.model.dto.user.UserAddRequest;
-import com.xlhl.onlinejudge.model.dto.user.UserLoginRequest;
-import com.xlhl.onlinejudge.model.dto.user.UserQueryRequest;
-import com.xlhl.onlinejudge.model.dto.user.UserRegisterRequest;
-import com.xlhl.onlinejudge.model.dto.user.UserUpdateMyRequest;
-import com.xlhl.onlinejudge.model.dto.user.UserUpdateRequest;
+import com.xlhl.onlinejudge.model.dto.user.*;
 import com.xlhl.onlinejudge.model.entity.User;
 import com.xlhl.onlinejudge.model.vo.LoginUserVO;
 import com.xlhl.onlinejudge.model.vo.UserVO;
 import com.xlhl.onlinejudge.service.UserService;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
-import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
-import me.chanjar.weixin.mp.api.WxMpService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 用户接口
@@ -51,8 +37,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @Resource
-    private WxOpenConfig wxOpenConfig;
 
     // region 登录相关
 
@@ -96,29 +80,6 @@ public class UserController {
         }
         LoginUserVO loginUserVO = userService.userLogin(userAccount, userPassword, request);
         return ResultUtils.success(loginUserVO);
-    }
-
-    /**
-     * 用户登录（微信开放平台）
-     */
-    @GetMapping("/login/wx_open")
-    public BaseResponse<LoginUserVO> userLoginByWxOpen(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("code") String code) {
-        WxOAuth2AccessToken accessToken;
-        try {
-            WxMpService wxService = wxOpenConfig.getWxMpService();
-            accessToken = wxService.getOAuth2Service().getAccessToken(code);
-            WxOAuth2UserInfo userInfo = wxService.getOAuth2Service().getUserInfo(accessToken, code);
-            String unionId = userInfo.getUnionId();
-            String mpOpenId = userInfo.getOpenid();
-            if (StringUtils.isAnyBlank(unionId, mpOpenId)) {
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "登录失败，系统错误");
-            }
-            return ResultUtils.success(userService.userLoginByMpOpen(userInfo, request));
-        } catch (Exception e) {
-            log.error("userLoginByWxOpen error", e);
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "登录失败，系统错误");
-        }
     }
 
     /**
