@@ -22,7 +22,7 @@ public enum JudgeInfoMessageEnum {
      * ● System Error：系统错误
      */
     ACCEPTED("成功", "Accepted"),
-    WRONG_ANSWER("失败", "WrongAnswer"),
+    WRONG_ANSWER("答案错误", "WrongAnswer"),
     COMPILE_ERROR("编译错误", "CompileError"),
     MEMORY_LIMIT_EXCEEDED("内存溢出", "MemoryLimitExceeded"),
     TIME_LIMIT_EXCEEDED("运行超时", "TimeLimitExceeded"),

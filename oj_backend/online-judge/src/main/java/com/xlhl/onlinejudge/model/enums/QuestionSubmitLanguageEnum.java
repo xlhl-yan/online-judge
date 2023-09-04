@@ -12,13 +12,13 @@ public enum QuestionSubmitLanguageEnum {
     /**
      * 支持的编程语言
      */
-    JAVA("Java"),
-    PYTHON("Python"),
-    C("C"),
-    PHP("PHP"),
-    CPP("C++"),
-    GOLANG("golang"),
-    JAVA_SCRIPT("JavaScript");
+    JAVA("java"),
+    PYTHON("python"),
+    C("c"),
+    PHP("php"),
+    CPP("cpp"),
+    GOLANG("go"),
+    JAVASCRIPT("js");
 
     private final String language;
 

@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -134,7 +133,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         UserVO userVO = userService.getUserVO(user);
         questionVO.setUserVO(userVO);
         // 2. 已登录，获取用户点赞、收藏状态
-        User loginUser = userService.getLoginUserPermitNull(request);
+//        User loginUser = userService.getLoginUserPermitNull(request);
         return questionVO;
     }
 
@@ -150,9 +149,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         Map<Long, List<User>> userIdUserListMap = userService.listByIds(userIdSet).stream()
                 .collect(Collectors.groupingBy(User::getId));
         // 2. 已登录，获取用户点赞、收藏状态
-        Map<Long, Boolean> questionIdHasThumbMap = new HashMap<>();
-        Map<Long, Boolean> questionIdHasFavourMap = new HashMap<>();
-        User loginUser = userService.getLoginUserPermitNull(request);
+//        Map<Long, Boolean> questionIdHasThumbMap = new HashMap<>();
+//        Map<Long, Boolean> questionIdHasFavourMap = new HashMap<>();
+//        User loginUser = userService.getLoginUserPermitNull(request);
         // 填充信息
         List<QuestionVO> questionVOList = questionList.stream().map(question -> {
             QuestionVO questionVO = QuestionVO.objToVo(question);

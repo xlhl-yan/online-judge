@@ -1,14 +1,16 @@
 <template>
-  <div id="code-editor" ref="codeEditorRef" style="height: 400px" />
+  <div
+    id="code-editor"
+    ref="codeEditorRef"
+    style="min-height: 600px; height: 100vh"
+  />
 </template>
 
 <script setup lang="ts">
 import * as monaco from "monaco-editor";
-import { defineProps, onMounted, ref, toRaw, withDefaults } from "vue";
+import { defineProps, onMounted, toRaw, ref, withDefaults } from "vue";
 
 const codeEditorRef = ref();
-const codeEditor = ref();
-const value = ref("HelloWorld");
 
 /**
  * 定义组件属性的类型
@@ -16,6 +18,7 @@ const value = ref("HelloWorld");
 interface Props {
   value: string;
   handleChange: (value: string) => void;
+  language: string;
 }
 
 /**
@@ -26,15 +29,8 @@ const props = withDefaults(defineProps<Props>(), {
   handleChange: (value: string) => {
     console.log(value);
   },
+  language: () => "java",
 });
-
-const fillValue = () => {
-  if (!codeEditor.value) {
-    return;
-  }
-  //  改变值
-  toRaw(codeEditor.value).setValue("新的值");
-};
 
 onMounted(() => {
   if (!codeEditorRef.value) {
@@ -42,7 +38,7 @@ onMounted(() => {
   }
   codeEditorRef.value = monaco.editor.create(codeEditorRef.value, {
     value: props.value,
-    language: "Java",
+    language: props.language,
     automaticLayout: true,
     minimap: {
       enabled: true,
@@ -54,6 +50,22 @@ onMounted(() => {
     props.handleChange(toRaw(codeEditorRef.value).getValue());
   });
 });
+
+// watchEffect([props.language], () => {
+//   codeEditorRef.value = monaco.editor.create(codeEditorRef.value, {
+//     value: props.value,
+//     language: props.language,
+//     automaticLayout: true,
+//     minimap: {
+//       enabled: true,
+//     },
+//     theme: "vs-dark",
+//     colorDecorators: true,
+//   });
+//   codeEditorRef.value.onDidChangeModelContent(() => {
+//     props.handleChange(toRaw(codeEditorRef.value).getValue());
+//   });
+// });
 </script>
 
 <style scoped></style>
