@@ -1,6 +1,5 @@
 package com.xlhl.onlinejudge.judge.codesandbox.model;
 
-import com.xlhl.onlinejudge.model.dto.questionsubmit.JudgeInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ExecuteCodeResponse {
     /**
-     * 输入用例
+     * 输出
      */
     private List<String> outputList;
 

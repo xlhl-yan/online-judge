@@ -8,9 +8,10 @@
 
 <script setup lang="ts">
 import * as monaco from "monaco-editor";
-import { defineProps, onMounted, toRaw, ref, withDefaults } from "vue";
+import { defineProps, onMounted, toRaw, ref, withDefaults, watch } from "vue";
 
 const codeEditorRef = ref();
+const codeEditor = ref();
 
 /**
  * 定义组件属性的类型
@@ -26,46 +27,45 @@ interface Props {
  */
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
-  handleChange: (value: string) => {
-    console.log(value);
-  },
   language: () => "java",
+  handleChange: (v: string) => {
+    console.log(v);
+  },
 });
 
 onMounted(() => {
   if (!codeEditorRef.value) {
     return;
   }
-  codeEditorRef.value = monaco.editor.create(codeEditorRef.value, {
+  codeEditor.value = monaco.editor.create(codeEditorRef.value, {
     value: props.value,
     language: props.language,
     automaticLayout: true,
+    colorDecorators: true,
     minimap: {
       enabled: true,
     },
+    readOnly: false,
     theme: "vs-dark",
-    colorDecorators: true,
   });
-  codeEditorRef.value.onDidChangeModelContent(() => {
-    props.handleChange(toRaw(codeEditorRef.value).getValue());
+
+  // 编辑 监听内容变化
+  codeEditor.value.onDidChangeModelContent(() => {
+    props.handleChange(toRaw(codeEditor.value).getValue());
   });
 });
 
-// watchEffect([props.language], () => {
-//   codeEditorRef.value = monaco.editor.create(codeEditorRef.value, {
-//     value: props.value,
-//     language: props.language,
-//     automaticLayout: true,
-//     minimap: {
-//       enabled: true,
-//     },
-//     theme: "vs-dark",
-//     colorDecorators: true,
-//   });
-//   codeEditorRef.value.onDidChangeModelContent(() => {
-//     props.handleChange(toRaw(codeEditorRef.value).getValue());
-//   });
-// });
+watch(
+  () => props.language,
+  () => {
+    if (codeEditor.value) {
+      monaco.editor.setModelLanguage(
+        toRaw(codeEditor.value).getModel(),
+        props.language
+      );
+    }
+  }
+);
 </script>
 
 <style scoped></style>

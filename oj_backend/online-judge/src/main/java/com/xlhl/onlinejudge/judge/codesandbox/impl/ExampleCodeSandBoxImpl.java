@@ -3,7 +3,7 @@ package com.xlhl.onlinejudge.judge.codesandbox.impl;
 import com.xlhl.onlinejudge.judge.codesandbox.CodeSandBox;
 import com.xlhl.onlinejudge.judge.codesandbox.model.ExecuteCodeRequest;
 import com.xlhl.onlinejudge.judge.codesandbox.model.ExecuteCodeResponse;
-import com.xlhl.onlinejudge.model.dto.questionsubmit.JudgeInfo;
+import com.xlhl.onlinejudge.judge.codesandbox.model.JudgeInfo;
 import com.xlhl.onlinejudge.model.enums.JudgeInfoMessageEnum;
 import com.xlhl.onlinejudge.model.enums.QuestionSubmitStatusEnum;
 

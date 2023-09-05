@@ -54,13 +54,13 @@
               style="width: 320px"
               placeholder="请选择语言"
             >
-              <a-option value="java">java</a-option>
-              <a-option value="c">c</a-option>
-              <a-option value="python">python</a-option>
-              <a-option value="php">php</a-option>
-              <a-option value="cpp">cpp</a-option>
-              <a-option value="go">golang</a-option>
-              <a-option value="js">javascript</a-option>
+              <a-option>java</a-option>
+              <a-option>c</a-option>
+              <a-option>python</a-option>
+              <a-option>php</a-option>
+              <a-option>cpp</a-option>
+              <a-option>go</a-option>
+              <a-option>javascript</a-option>
             </a-select>
           </a-form-item>
           <a-form-item>

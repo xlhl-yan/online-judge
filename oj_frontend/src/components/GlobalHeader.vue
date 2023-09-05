@@ -24,20 +24,28 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>{{ store.state.user?.loginUser?.userName ?? "未登录" }}</div>
+      <div>
+        <a-space v-if="store.state.user?.loginUser?.userName">
+          {{ store.state.user?.loginUser?.userName }}
+        </a-space>
+        <a-space v-else>
+          <a-button @click="doLogin" type="primary">登录</a-button>
+        </a-space>
+      </div>
     </a-col>
   </a-row>
 </template>
 
 <script setup lang="ts">
 import { routes } from "@/router/routes";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
 
 const store = useStore();
 const router = useRouter();
+const route = useRoute();
 /**
  * 展示在菜单的路由
  */
@@ -65,6 +73,13 @@ router.afterEach((to, from, failure) => {
 //     userRole: AccessEnum.ADMIN,
 //   });
 // }, 1000 * 3);
+
+const doLogin = () => {
+  router.push({
+    path: "/user/login",
+    replace: true,
+  });
+};
 
 const doMenuClick = (key: string) => {
   router.push({

@@ -1,11 +1,11 @@
-package com.xlhl.onlinejudge.model.dto.questionsubmit;
+package com.xlhl.onlinejudge.judge.codesandbox.model;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 题目提交点赞请求
+ * 题目提交请求
  *
  * @author <a href="https://github.com/xlhl-yan">xlhl</a>
  */

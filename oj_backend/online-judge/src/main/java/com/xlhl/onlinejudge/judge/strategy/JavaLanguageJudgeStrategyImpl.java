@@ -3,7 +3,7 @@ package com.xlhl.onlinejudge.judge.strategy;
 import cn.hutool.json.JSONUtil;
 import com.xlhl.onlinejudge.model.dto.question.JudgeCase;
 import com.xlhl.onlinejudge.model.dto.question.JudgeConfig;
-import com.xlhl.onlinejudge.model.dto.questionsubmit.JudgeInfo;
+import com.xlhl.onlinejudge.judge.codesandbox.model.JudgeInfo;
 import com.xlhl.onlinejudge.model.entity.Question;
 import com.xlhl.onlinejudge.model.enums.JudgeInfoMessageEnum;
 

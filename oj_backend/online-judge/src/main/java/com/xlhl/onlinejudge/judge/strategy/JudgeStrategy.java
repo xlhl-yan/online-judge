@@ -1,6 +1,6 @@
 package com.xlhl.onlinejudge.judge.strategy;
 
-import com.xlhl.onlinejudge.model.dto.questionsubmit.JudgeInfo;
+import com.xlhl.onlinejudge.judge.codesandbox.model.JudgeInfo;
 
 /**
  * 判题策略

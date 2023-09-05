@@ -1,7 +1,7 @@
 package com.xlhl.onlinejudge.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.xlhl.onlinejudge.model.dto.questionsubmit.JudgeInfo;
+import com.xlhl.onlinejudge.judge.codesandbox.model.JudgeInfo;
 import com.xlhl.onlinejudge.model.entity.QuestionSubmit;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
