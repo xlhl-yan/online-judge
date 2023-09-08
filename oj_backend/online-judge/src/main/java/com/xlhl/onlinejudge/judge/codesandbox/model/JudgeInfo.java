@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 题目提交请求
+ * 判题信息
  *
  * @author <a href="https://github.com/xlhl-yan">xlhl</a>
  */

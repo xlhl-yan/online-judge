@@ -9,10 +9,10 @@ import com.xlhl.onlinejudge.judge.codesandbox.CodeSandBoxFactory;
 import com.xlhl.onlinejudge.judge.codesandbox.CodeSandBoxProxy;
 import com.xlhl.onlinejudge.judge.codesandbox.model.ExecuteCodeRequest;
 import com.xlhl.onlinejudge.judge.codesandbox.model.ExecuteCodeResponse;
+import com.xlhl.onlinejudge.judge.codesandbox.model.JudgeInfo;
 import com.xlhl.onlinejudge.judge.strategy.JudgeContext;
 import com.xlhl.onlinejudge.judge.strategy.JudgeManager;
 import com.xlhl.onlinejudge.model.dto.question.JudgeCase;
-import com.xlhl.onlinejudge.judge.codesandbox.model.JudgeInfo;
 import com.xlhl.onlinejudge.model.entity.Question;
 import com.xlhl.onlinejudge.model.entity.QuestionSubmit;
 import com.xlhl.onlinejudge.model.enums.QuestionSubmitStatusEnum;
@@ -20,6 +20,7 @@ import com.xlhl.onlinejudge.service.QuestionService;
 import com.xlhl.onlinejudge.service.QuestionSubmitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -87,36 +88,57 @@ public class JudgeServiceImpl implements JudgeService {
                 .language(language)
                 .inputList(inputList)
                 .build();
+
         CodeSandBox sandBox = CodeSandBoxFactory.newInstance(type);
         CodeSandBoxProxy sandBoxProxy = new CodeSandBoxProxy(sandBox);
 
         ExecuteCodeResponse executeCodeResponse = sandBoxProxy.executeCode(executeCodeRequest);
 
-        //  ● 先判断沙箱执行的结果输出数量与输入用例的数量是否相等
-        List<String> outputList = judgeCaseList.stream().map(JudgeCase::getOutput).collect(Collectors.toList());
-//        List<String> outputList = executeCodeResponse.getOutputList();
-
-
-        JudgeContext judgeContext = new JudgeContext();
-        judgeContext.setJudgeInfo(executeCodeResponse.getJudgeInfo());
-        judgeContext.setInputList(inputList);
-        judgeContext.setOutputList(outputList);
-        judgeContext.setQuestion(question);
-        judgeContext.setJudgeCaseList(judgeCaseList);
-        judgeContext.setQuestionSubmit(questionSubmit);
-
-        JudgeInfo info = judgeManager.doJudge(judgeContext);
+        updateQuestionSubmit = new QuestionSubmit();
+        QuestionSubmitStatusEnum questionSubmitStatusEnum = QuestionSubmitStatusEnum.FAIL;
+        //  判断代码是否执行成功
+        JudgeInfo judgeInfo = executeCodeResponse.getJudgeInfo();
+        if (executeCodeResponse.getStatus() == HttpStatus.OK.value()) {
+            questionSubmitStatusEnum = QuestionSubmitStatusEnum.SUCCESS;
+            judgeInfo = doCodeSandbox(judgeCaseList, judgeInfo, question, questionSubmit);
+        }
 
         //  修改数据库中的判题结果
-        updateQuestionSubmit = new QuestionSubmit();
         updateQuestionSubmit.setId(questionSubmitId);
-        updateQuestionSubmit.setStatus(QuestionSubmitStatusEnum.SUCCESS.getValue());
-        updateQuestionSubmit.setJudgeInfo(JSONUtil.toJsonStr(info));
+        updateQuestionSubmit.setJudgeInfo(JSONUtil.toJsonStr(judgeInfo));
+        updateQuestionSubmit.setStatus(questionSubmitStatusEnum.getValue());
         update = questionSubmitService.updateById(updateQuestionSubmit);
         if (!update) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "题目状态无法更新");
         }
 
         return questionSubmitService.getById(questionId);
+    }
+
+    /**
+     * 进行判题
+     *
+     * @param judgeCaseList  输入输出用例
+     * @param judgeInfo      代码执行消耗信息
+     * @param question       题目信息
+     * @param questionSubmit 提交记录
+     * @return 判题结果
+     */
+    private JudgeInfo doCodeSandbox(List<JudgeCase> judgeCaseList,
+                                    JudgeInfo judgeInfo,
+                                    Question question,
+                                    QuestionSubmit questionSubmit) {
+        //  ● 先判断沙箱执行的结果输出数量与输入用例的数量是否相等
+        List<String> outputList = judgeCaseList.stream().map(JudgeCase::getOutput).collect(Collectors.toList());
+        List<String> inputList = judgeCaseList.stream().map(JudgeCase::getInput).collect(Collectors.toList());
+        JudgeContext judgeContext = new JudgeContext();
+        judgeContext.setJudgeInfo(judgeInfo);
+        judgeContext.setInputList(inputList);
+        judgeContext.setOutputList(outputList);
+        judgeContext.setQuestion(question);
+        judgeContext.setJudgeCaseList(judgeCaseList);
+        judgeContext.setQuestionSubmit(questionSubmit);
+
+        return judgeManager.doJudge(judgeContext);
     }
 }

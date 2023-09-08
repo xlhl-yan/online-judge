@@ -65,7 +65,6 @@ public class JavaLanguageJudgeStrategyImpl implements JudgeStrategy {
         }
         //  ● 判断每一项输出限制是否符合规则
 
-
         String judgeConfig = question.getJudgeConfig();
         JudgeConfig config = JSONUtil.toBean(judgeConfig, JudgeConfig.class);
 

@@ -2,6 +2,11 @@
 
 ## Project setup
 
+## 快速根据后台接口文档生成代码
+```shell
+openapi --input http://localhost:8081/api/v2/api-docs --output ./generated --client axios
+```
+## 安装依赖
 ```
 npm install
 ```

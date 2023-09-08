@@ -2,9 +2,12 @@ package com.xlhl.onlinejudgecodesandbox.codesandbox.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.xlhl.onlinejudgecodesandbox.codesandbox.model.ExecuteMessage;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.StopWatch;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ProcessUtils
@@ -37,36 +40,38 @@ public class ProcessUtils {
                 //  分批获取进程的正常输出流
 
                 String compileOutputLine;
-                StringBuilder compileOutputBuilder = new StringBuilder();
+                List<String> outputList = new ArrayList<>();
                 //  循环读取
                 while ((compileOutputLine = bufferedReader.readLine()) != null) {
-                    compileOutputBuilder.append(compileOutputLine).append("\n");
+                    outputList.add(compileOutputLine);
                 }
-                System.out.println(compileOutputBuilder);
-                executeMessage.setMessage(compileOutputBuilder.toString());
+                String output = StringUtils.join(outputList, "\n");
+                executeMessage.setMessage(output);
             } else {
                 //  异常退出
                 System.out.println(opName + "失败，错误码：" + exitValue);
                 //  分批获取进程的正常输出流
                 String compileOutputLine;
-                StringBuilder compileOutputBuilder = new StringBuilder();
+                List<String> outputList = new ArrayList<>();
                 //  循环读取
                 while ((compileOutputLine = bufferedReader.readLine()) != null) {
-                    compileOutputBuilder.append(compileOutputLine);
+                    outputList.add(compileOutputLine);
                 }
-                System.out.println(compileOutputBuilder);
+                System.out.println(outputList);
+                String output = StringUtils.join(outputList, "\n");
+                executeMessage.setMessage(output);
 
                 //  分批获取进程的错误输出流
                 BufferedReader errorBufferedReader = new BufferedReader(new InputStreamReader(runProcess.getErrorStream()));
                 String errorCompileOutputLine;
-                StringBuilder errorCompileOutputBuilder = new StringBuilder();
+                List<String> errorOutputList = new ArrayList<>();
                 //  循环读取
                 while ((errorCompileOutputLine = errorBufferedReader.readLine()) != null) {
-                    errorCompileOutputBuilder.append(errorCompileOutputLine);
+                    errorOutputList.add(errorCompileOutputLine);
                 }
 
-                System.out.println(errorBufferedReader);
-                executeMessage.setErrorMessage(errorCompileOutputBuilder.toString());
+                String errorOutput = StringUtils.join(errorOutputList, "\n");
+                executeMessage.setErrorMessage(errorOutput);
             }
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();

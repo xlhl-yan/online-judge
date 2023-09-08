@@ -26,10 +26,10 @@ public class JudgeManager {
     public JudgeInfo doJudge(JudgeContext judgeContext) {
         QuestionSubmit questionSubmit = judgeContext.getQuestionSubmit();
         String language = questionSubmit.getLanguage();
-        JudgeStrategy defaultJudgeStrategy = new DefaultJudgeStrategyImpl();
+        JudgeStrategy judgeStrategy = new DefaultJudgeStrategyImpl();
         if (Objects.equals(QuestionSubmitLanguageEnum.JAVA.getLanguage(), language)) {
-            defaultJudgeStrategy = new JavaLanguageJudgeStrategyImpl();
+            judgeStrategy = new JavaLanguageJudgeStrategyImpl();
         }
-        return defaultJudgeStrategy.doJudge(judgeContext);
+        return judgeStrategy.doJudge(judgeContext);
     }
 }

@@ -8,6 +8,7 @@ import AddQuestion from "@/views/question/AddQuestionView.vue";
 import ManageQuestion from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
+import QuestionsSubmitView from "@/views/question/QuestionsSubmitView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +35,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "主页",
     component: QuestionsView,
+  },
+  {
+    path: "/question_submit",
+    name: "提交记录",
+    component: QuestionsSubmitView,
   },
   {
     path: "/questions",

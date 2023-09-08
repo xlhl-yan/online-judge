@@ -40,9 +40,16 @@ class CodeSandBoxTest {
     @Test
     void executeCodeByValue() {
         ExecuteCodeRequest executeCodeRequest = ExecuteCodeRequest.builder()
-                .code("int main(){}")
+                .code("public class Main {\n" +
+                        "\n" +
+                        "    public static void main(String[] args) {\n" +
+                        "        int a = Integer.parseInt(args[0]);\n" +
+                        "        int b = Integer.parseInt(args[1]);\n" +
+                        "        System.out.println(\"结果为：\" + (a + b));\n" +
+                        "    }\n" +
+                        "}\n")
                 .language(QuestionSubmitLanguageEnum.JAVA.getLanguage())
-                .inputList(Arrays.asList("1,2", "3,4"))
+                .inputList(Arrays.asList("1 2", "3 4"))
                 .build();
 
         CodeSandBox sandBox = CodeSandBoxFactory.newInstance(type);
