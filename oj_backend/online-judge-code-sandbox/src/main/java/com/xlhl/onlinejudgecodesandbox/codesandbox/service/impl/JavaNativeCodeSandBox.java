@@ -3,6 +3,7 @@ package com.xlhl.onlinejudgecodesandbox.codesandbox.service.impl;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.dfa.FoundWord;
 import cn.hutool.dfa.WordTree;
 import com.xlhl.onlinejudgecodesandbox.codesandbox.model.ExecuteCodeRequest;
 import com.xlhl.onlinejudgecodesandbox.codesandbox.model.ExecuteCodeResponse;
@@ -81,20 +82,18 @@ public class JavaNativeCodeSandBox implements CodeSandBox {
      */
     @Override
     public ExecuteCodeResponse executeCode(ExecuteCodeRequest executeCodeRequest) {
-//        System.setSecurityManager(new DenySecurityManager());
-
         List<String> inputList = executeCodeRequest.getInputList();
         String code = executeCodeRequest.getCode();
         String language = executeCodeRequest.getLanguage();
         System.out.println("传入代码为：{\n" + code + "}");
 //        log.info("传入代码为：{}", code);
         //  校验代码
-//        FoundWord foundWord = WORD_TREE.matchWord(code);
-//        if (foundWord != null) {
-//            System.out.println("出现敏感词:：{" + foundWord.getFoundWord() + "}");
-////            log.info("出现敏感词:{}", foundWord.getFoundWord());
-//            return null;
-//        }
+        FoundWord foundWord = WORD_TREE.matchWord(code);
+        if (foundWord != null) {
+            System.out.println("出现敏感词:：{" + foundWord.getFoundWord() + "}");
+//            log.info("出现敏感词:{}", foundWord.getFoundWord());
+            return null;
+        }
 
         //  region 1.把代码写入到临时文件中
         String property = System.getProperty("user.dir");
@@ -146,6 +145,7 @@ public class JavaNativeCodeSandBox implements CodeSandBox {
                         //  判断进程是否完成
                         runProcess.destroy();
                     } catch (InterruptedException e) {
+                        log.error("出现异常：", e);
                         e.printStackTrace();
                     }
                 });

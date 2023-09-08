@@ -37,4 +37,9 @@ public class ExecuteMessage {
      * 执行用时
      */
     private Long timeConsuming;
+
+    /**
+     * 占用内存
+     */
+    private Long memoryConsuming;
 }
