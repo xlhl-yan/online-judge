@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>online-judge-microservice</artifactId>
+        <groupId>com.xlhl</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>online-judge-gateway</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>online-judge-gateway</name>
+    <description>online-judge-gateway</description>
+    <properties>
+        <java.version>8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <version>3.1.4</version>
+        </dependency>
+
+        <!--    region Gateway-knife4j:4.3.0        -->
+        <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-gateway-spring-boot-starter -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <!--    endregion        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--  region com.xlhl service-client、common、model      -->
+        <dependency>
+            <groupId>com.xlhl</groupId>
+            <artifactId>online-judge-service-client</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xlhl</groupId>
+            <artifactId>online-judge-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xlhl</groupId>
+            <artifactId>online-judge-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--   endregion     -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.13</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

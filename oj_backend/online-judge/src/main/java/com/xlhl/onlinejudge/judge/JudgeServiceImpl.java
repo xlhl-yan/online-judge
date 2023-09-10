@@ -112,7 +112,7 @@ public class JudgeServiceImpl implements JudgeService {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "题目状态无法更新");
         }
 
-        return questionSubmitService.getById(questionId);
+        return questionSubmitService.getById(questionSubmitId);
     }
 
     /**
