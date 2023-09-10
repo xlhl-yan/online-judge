@@ -5,7 +5,7 @@ import com.xlhl.onlinejudgecommon.common.ErrorCode;
 /**
  * 抛异常工具类
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public class ThrowUtils {

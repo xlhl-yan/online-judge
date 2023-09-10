@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 用户更新个人信息请求
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 @Data

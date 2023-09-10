@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 用户服务
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  */
 @FeignClient(name = "online-judge-user-service", path = "/api/user/inner")
 public interface UserFeignClient {

@@ -1,10 +1,12 @@
 package com.xlhl.onlinejudgegateway.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -23,6 +25,7 @@ import java.nio.charset.StandardCharsets;
  * @description 全局权限校验
  */
 @Component
+@Slf4j
 public class GlobalAuthFilter implements GlobalFilter, Ordered {
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
@@ -30,6 +33,8 @@ public class GlobalAuthFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        HttpMethod method = request.getMethod();
+        log.info("请求的方式为：{}", method);
         String uri = request.getURI().getPath();
         //  判断路径中是否包含 inner，只允许内部调用
         if (antPathMatcher.match("/**/inner/**", uri)) {
@@ -46,6 +51,6 @@ public class GlobalAuthFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
+        return -1;
     }
 }

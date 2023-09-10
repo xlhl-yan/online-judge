@@ -3,7 +3,7 @@ package com.xlhl.onlinejudgecommon.constant;
 /**
  * 通用常量
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  */
 public interface CommonConstant {
 

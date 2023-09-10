@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 用户
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 @TableName(value = "user")

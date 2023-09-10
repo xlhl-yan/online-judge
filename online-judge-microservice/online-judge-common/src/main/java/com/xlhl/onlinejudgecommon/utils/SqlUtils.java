@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * SQL 工具
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public class SqlUtils {

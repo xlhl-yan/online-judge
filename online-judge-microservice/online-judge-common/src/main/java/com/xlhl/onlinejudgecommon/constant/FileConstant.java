@@ -3,7 +3,7 @@ package com.xlhl.onlinejudgecommon.constant;
 /**
  * 文件常量
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public interface FileConstant {

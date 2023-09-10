@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * 内部使用的题目服务
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  */
 @RestController
 @RequestMapping("/inner")

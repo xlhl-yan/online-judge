@@ -3,7 +3,7 @@ package com.xlhl.onlinejudgecommon.common;
 /**
  * 返回工具类
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public class ResultUtils {

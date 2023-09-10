@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * 文件上传业务类型枚举
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public enum FileUploadBizEnum {

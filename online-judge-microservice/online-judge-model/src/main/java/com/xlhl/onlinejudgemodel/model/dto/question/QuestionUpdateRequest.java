@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 更新请求
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  */
 @Data
 public class QuestionUpdateRequest implements Serializable {

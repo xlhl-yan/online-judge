@@ -6,7 +6,7 @@ import java.net.InetAddress;
 /**
  * 网络工具类
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public class NetUtils {

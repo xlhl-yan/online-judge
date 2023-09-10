@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 用户视图（脱敏）
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 @Data

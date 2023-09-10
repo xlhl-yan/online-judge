@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 判题信息
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  */
 @Data
 public class JudgeInfo implements Serializable {

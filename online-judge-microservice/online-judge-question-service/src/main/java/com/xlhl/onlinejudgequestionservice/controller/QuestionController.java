@@ -36,7 +36,7 @@ import java.util.Objects;
 /**
  * 题目接口
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  */
 @RestController
 @RequestMapping

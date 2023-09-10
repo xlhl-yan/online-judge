@@ -37,7 +37,7 @@ public class MessageConsumer implements ChannelAwareMessageListener {
         } catch (Exception e) {
             log.error("消息处理失败：", e);
             e.printStackTrace();
-            channel.basicNack(deliveryTag, false, true);
+            channel.basicNack(deliveryTag, false, false);
         }
     }
 }

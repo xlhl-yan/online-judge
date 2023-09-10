@@ -3,7 +3,7 @@ package com.xlhl.onlinejudgecommon.common;
 /**
  * 自定义错误码
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public enum ErrorCode {

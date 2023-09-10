@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 /**
  * 用户服务实现
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 @Service

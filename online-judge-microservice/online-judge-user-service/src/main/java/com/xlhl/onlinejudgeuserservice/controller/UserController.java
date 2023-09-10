@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * 用户接口
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 @RestController

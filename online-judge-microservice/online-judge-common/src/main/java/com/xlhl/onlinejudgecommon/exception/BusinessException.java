@@ -5,7 +5,7 @@ import com.xlhl.onlinejudgecommon.common.ErrorCode;
 /**
  * 自定义异常类
  *
- * @author <a href="https://github.com/xlhl-yan">xlhl</a>
+ * @author xlhl
  * 
  */
 public class BusinessException extends RuntimeException {
